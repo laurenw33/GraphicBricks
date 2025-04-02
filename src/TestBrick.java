@@ -5,8 +5,7 @@ public class TestBrick {
         BrickLayout b = new BrickLayout("src/bricks", 7, true);
         b.printBrickLayout();
         DrawPanel p = new DrawPanel();
-//        p.setGrid(b.getBrickLayout());
-        System.out.println(Arrays.deepToString(p.getGrid()));
+        p.setGrid(b.getBrickLayout());
         MainFrame frame = new MainFrame("Not Tetris");
     }
 }
