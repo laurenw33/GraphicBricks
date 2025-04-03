@@ -35,7 +35,7 @@ public class BrickLayout {
             int end = b.getEnd();
 
             if (end >= brickLayout[0].length) {
-                int newCols = end + 1; // Ensure enough columns
+                int newCols = end + 1;
                 int[][] newLayout = new int[brickLayout.length][newCols];
 
                 for (int i = 0; i < brickLayout.length; i++) {
@@ -44,7 +44,7 @@ public class BrickLayout {
                     }
                 }
 
-                brickLayout = newLayout; // Update reference
+                brickLayout = newLayout;
             }
 
             int row = brickLayout.length - 1;

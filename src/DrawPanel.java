@@ -5,19 +5,17 @@ import javax.swing.JPanel;
 
 public class DrawPanel extends JPanel implements MouseListener{
 
-    private int[][] grid;
+    private BrickLayout b;
 
     public DrawPanel() {
         this.addMouseListener(this);
-    }
+        b = new BrickLayout("src/bricks", 7, false);
 
-    public void setGrid(int[][] grid) {
-        this.grid = grid;
-        repaint();
     }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        int[][] grid = b.getBrickLayout();
 
         if (grid == null) {
             return;
@@ -56,6 +54,7 @@ public class DrawPanel extends JPanel implements MouseListener{
     }
 
     public void mouseClicked(MouseEvent e) {
+        b.doOneBrick();
     }
 
     public void mousePressed(MouseEvent e) {
