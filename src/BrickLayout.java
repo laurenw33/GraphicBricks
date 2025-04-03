@@ -34,56 +34,45 @@ public class BrickLayout {
             int start = b.getStart();
             int end = b.getEnd();
 
-            if (end >= brickLayout[0].length) {
-                int newCols = end + 1;
-                int[][] newLayout = new int[brickLayout.length][newCols];
-
-                for (int i = 0; i < brickLayout.length; i++) {
-                    for (int j = 0; j < brickLayout[0].length; j++) {
-                        newLayout[i][j] = brickLayout[i][j];
-                    }
-                }
-
-                brickLayout = newLayout;
-            }
-
-            int row = brickLayout.length - 1;
+            int row = 0;
             boolean placed = false;
 
             while (!placed) {
-                if (row < 0) {
-                    int newRows = brickLayout.length + 1;
-                    int cols = brickLayout[0].length;
-                    int[][] newLayout = new int[newRows][cols];
-
-                    for (int i = 0; i < brickLayout.length; i++) {
-                        for (int j = 0; j < cols; j++) {
-                            newLayout[i + 1][j] = brickLayout[i][j];
-                        }
-                    }
-
-                    brickLayout = newLayout;
-                    row = 0;
-                }
-
                 boolean canPlace = true;
                 for (int col = start; col <= end; col++) {
                     if (brickLayout[row][col] == 1) {
                         canPlace = false;
+                        break;
                     }
                 }
 
                 if (canPlace) {
-                    for (int col = start; col <= end; col++) {
-                        brickLayout[row][col] = 1;
+                    boolean canFitBelow = true;
+                    for (int r = row + 1; r < brickLayout.length; r++) {
+                        for (int col = start; col <= end; col++) {
+                            if (brickLayout[r][col] == 1) {
+                                canFitBelow = false;
+                                break;
+                            }
+                        }
+                        if (!canFitBelow) break;
                     }
-                    placed = true;
+
+                    if (canFitBelow || row == brickLayout.length - 1) {
+                        for (int col = start; col <= end; col++) {
+                            brickLayout[row][col] = 1;
+                        }
+                        placed = true;
+                    } else {
+                        row++;
+                    }
                 } else {
-                    row--;
+                    row++;
                 }
             }
         }
     }
+
 
     public int[][] getBrickLayout() {
         return brickLayout;
