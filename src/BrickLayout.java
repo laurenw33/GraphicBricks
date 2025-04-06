@@ -8,6 +8,7 @@ public class BrickLayout {
     private ArrayList<Brick> bricks;
     private int[][] brickLayout;
     private int cols;
+    private int[][] temporaryDisplay;
 
     public BrickLayout(String fileName, int cols, boolean dropAllBricks) {
         this.cols = cols;
@@ -34,10 +35,10 @@ public class BrickLayout {
             int start = b.getStart();
             int end = b.getEnd();
 
-            int row = 0;
+            int row = brickLayout.length - 1;
             boolean placed = false;
 
-            while (!placed) {
+            while (!placed && row >= 0) {
                 boolean canPlace = true;
                 for (int col = start; col <= end; col++) {
                     if (brickLayout[row][col] == 1) {
@@ -47,27 +48,27 @@ public class BrickLayout {
                 }
 
                 if (canPlace) {
-                    boolean canFitBelow = true;
-                    for (int r = row + 1; r < brickLayout.length; r++) {
+                    boolean canFitAbove = true;
+                    for (int r = row - 1; r >= 0; r--) {
                         for (int col = start; col <= end; col++) {
                             if (brickLayout[r][col] == 1) {
-                                canFitBelow = false;
+                                canFitAbove = false;
                                 break;
                             }
                         }
-                        if (!canFitBelow) break;
+                        if (!canFitAbove) break;
                     }
 
-                    if (canFitBelow || row == brickLayout.length - 1) {
+                    if (canFitAbove || row == 0) {
                         for (int col = start; col <= end; col++) {
                             brickLayout[row][col] = 1;
                         }
                         placed = true;
                     } else {
-                        row++;
+                        row--;
                     }
                 } else {
-                    row++;
+                    row--;
                 }
             }
         }
