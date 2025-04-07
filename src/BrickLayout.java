@@ -22,6 +22,7 @@ public class BrickLayout {
             bricks.add(b);
         }
         brickLayout = new int[bricks.size()][cols];
+        temporaryDisplay = new int[bricks.size()][cols];
         if (dropAllBricks) {
             while (bricks.size() != 0) {
                 doOneBrick();
@@ -87,7 +88,7 @@ public class BrickLayout {
                 if (row > 0) {
                     for (Brick b : bricks) {
                         for (int c = b.getStart(); c < b.getEnd(); c++) {
-                            temporaryDisplay[row - 1][c] = 0;
+                            temporaryDisplay[row + 1][c] = 0;
                         }
                     }
                 }
@@ -110,6 +111,10 @@ public class BrickLayout {
 
     public int[][] getBrickLayout() {
         return brickLayout;
+    }
+
+    public int[][] getTemporaryDisplay() {
+        return temporaryDisplay;
     }
 
     public ArrayList<String> getFileData(String fileName) {
