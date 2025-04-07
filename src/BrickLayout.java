@@ -78,7 +78,6 @@ public class BrickLayout {
         long startTime = System.currentTimeMillis();
         long timeInterval = 1000;
         int row = 0;
-
         while (true) {
             long currentTime = System.currentTimeMillis();
 
