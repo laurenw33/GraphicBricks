@@ -54,7 +54,7 @@ public class DrawPanel extends JPanel implements MouseListener{
     }
 
     public void mouseClicked(MouseEvent e) {
-        b.doOneBrick();
+        b.bricksFalling();
     }
 
     public void mousePressed(MouseEvent e) {

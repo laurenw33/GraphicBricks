@@ -74,6 +74,40 @@ public class BrickLayout {
         }
     }
 
+    public void bricksFalling() {
+        long startTime = System.currentTimeMillis();
+        long timeInterval = 1000;
+        int row = 0;
+
+        while (true) {
+            long currentTime = System.currentTimeMillis();
+
+            if (currentTime - startTime >= timeInterval) {
+                startTime = currentTime;
+
+                if (row > 0) {
+                    for (Brick b : bricks) {
+                        for (int c = b.getStart(); c < b.getEnd(); c++) {
+                            temporaryDisplay[row - 1][c] = 0;
+                        }
+                    }
+                }
+
+                for (Brick b : bricks) {
+                    for (int c = b.getStart(); c < b.getEnd(); c++) {
+                        temporaryDisplay[row][c] = 1;
+                    }
+                }
+
+                row++;
+
+                if (row >= brickLayout.length) {
+                    break;
+                }
+            }
+        }
+    }
+
 
     public int[][] getBrickLayout() {
         return brickLayout;
