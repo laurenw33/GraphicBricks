@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 public class DrawPanel extends JPanel implements MouseListener{
 
     private BrickLayout b;
+    private long startTime = System.currentTimeMillis();
+    private int counter = 0;
 
     public DrawPanel() {
         this.addMouseListener(this);
@@ -35,6 +37,20 @@ public class DrawPanel extends JPanel implements MouseListener{
             y += 25;
         }
 
+        int rate = 1;
+        int timeInterval = 100;
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - startTime >= timeInterval/rate) {
+            counter ++;
+            if (counter == rate) {
+                b.doOneBrick();
+                counter = 0;
+            }
+            b.bricksFalling();
+            startTime = currentTime;
+        }
+
         Graphics2D g2 = (Graphics2D) g;
 
         int x1;
@@ -54,7 +70,6 @@ public class DrawPanel extends JPanel implements MouseListener{
     }
 
     public void mouseClicked(MouseEvent e) {
-        b.bricksFalling();
     }
 
     public void mousePressed(MouseEvent e) {

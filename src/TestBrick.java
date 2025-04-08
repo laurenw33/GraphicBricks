@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class TestBrick {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame("Not Tetris");

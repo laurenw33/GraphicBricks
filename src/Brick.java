@@ -2,11 +2,17 @@ public class Brick {
     private int start;
     private int end;
     private int height;
+    private int currRow;
+    private int endingRow;
+    private boolean placed;
 
     public Brick(int start, int end) {
         this.start = start;
         this.end = end;
+        currRow = 0;
         this.height = 0;
+        endingRow = 0;
+        this.placed = false;
     }
 
     public int getStart() {
@@ -35,5 +41,27 @@ public class Brick {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setEndingRow(int endingRow) {this.endingRow = endingRow;}
+
+    public boolean isPlaced() {
+        return placed;
+    }
+
+    public void setPlaced(boolean placed) {
+        this.placed = placed;
+    }
+
+    public int getEndingRow() {
+        return endingRow;
+    }
+
+    public int getCurrRow() {
+        return currRow;
+    }
+
+    public void setCurrRow(int currRow) {
+        this.currRow = currRow;
     }
 }
